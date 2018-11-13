@@ -5,27 +5,31 @@
 	<title>Document</title>
 </head>
 <style>
-html,body{
-			margin: 0;
-			height: 100%;
-			width: 100%;
-			-webkit-overflow-scrolling: touch;
-			-webkit-overflow-scrolling: touch;
+		html,body{
+					margin: 0;
+					height: 100%;
+					width: 100%;
+					-webkit-overflow-scrolling: touch;
+					-webkit-overflow-scrolling: touch;
 		}
 		#scrollWrap{
 			/*border: 1px #f00 solid;*/
 			height: 100%;
 			/*overflow: auto;*/
 		}
+		span{
+			font-size: 40px;
+			font-family: "微软雅黑";
+			font-weight: bold;
+		}
 </style>
 <body>
-	<div id="scrollWrap">200000000000000000</div>
+	<div id="scrollWrap"><span>200000000000000000</span></div>
 </body>
 	<script type="text/javascript">
 		function a(){
 				window.location.replace("a.html")
 			}
-		
 		//滚动条是否在顶部
 		var isScroll_top = true;
 		//滚动条是否在底部
