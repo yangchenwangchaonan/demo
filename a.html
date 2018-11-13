@@ -5,6 +5,71 @@
 	<title>Document</title>
 </head>
 <body>
-	<div>200000000000000000</div>
+	<div id="scrollWrap">200000000000000000</div>
 </body>
+	<script type="text/javascript">
+		function a(){
+				window.location.replace("a.html")
+			}
+		
+		//滚动条是否在顶部
+		var isScroll_top = true;
+		//滚动条是否在底部
+		var isScrill_bottom = false;
+		function restoreEvent(event) {
+			switch(event.type){
+				case "touchstart" :
+					$startY = event.touches[0].clientY;
+					break;
+				case "touchmove" :
+					$moveY = event.touches[0].clientY;
+					//滑动距离
+					touchesY = $startY - $moveY;
+					//滚动条顶部
+					if(isScroll_top) {
+						if(touchesY < 0) {
+							event.preventDefault();
+						}else{
+							var scrollWrap = document.getElementById("scrollWrap");
+							if(scrollWrap.scrollHeight == scrollWrap.clientHeight) {
+								event.preventDefault();
+							}else {
+								event.stopPropagation();
+							}
+						}
+					//滚动条底部
+					}else if(isScrill_bottom){
+						if(touchesY	> 0) {
+							event.preventDefault();
+						}else{
+							event.stopPropagation();
+						}
+					}
+					break;
+				case "touchend" :
+					break;
+			}
+		}
+	
+		document.getElementById("scrollWrap").addEventListener("touchstart",restoreEvent);
+		document.getElementById("scrollWrap").addEventListener("touchmove",restoreEvent);
+		document.getElementById("scrollWrap").addEventListener("touchend",restoreEvent);
+		document.getElementById("scrollWrap").addEventListener("scroll",function() {
+		    var tabView = document.getElementById("scrollWrap");
+		    var contentHeight = tabView.scrollHeight, //内容高度
+		    scrollTop = tabView.scrollTop; //滚动高度
+		    viewHeight = tabView.clientHeight;
+		
+			if(scrollTop == 0) {
+				isScroll_top = true;
+			}else{
+				isScroll_top = false;
+			}
+		    if ((scrollTop / (contentHeight - viewHeight)) == 1 ) {
+		        isScrill_bottom = true;
+		    }else {
+		    	isScrill_bottom = false;
+		    }
+		});
+	</script>
 </html>
