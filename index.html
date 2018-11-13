@@ -1,58 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>逐帧动画</title>
-	<script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
-</head>
-<style>
-    
-   div{
-    width: 100%;
-    height: 100%;
-   }
-</style>
-<body>
-  <div id="div1" >
-    <p>lalalalall</p>
-    <p>lalalalall</p>
-    <p>lalalalall</p>
-    <p>lalalalall</p>
-    <p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p><p>lalalalall</p>
-  </div>
-	<script>
-         // 防止过分拉动
-        preventMove: function(e) {
-            // 高位表示向上滚动, 底位表示向下滚动: 1容许 0禁止
-            var status = '11', 
-                e = e || window.event, // 使用 || 运算取得event对象
-                ele = this,
-                currentY = e.touches[0].clientY,
-                startY = startMoveYmap[ele.id],
-                scrollTop = ele.scrollTop,
-                offsetHeight = ele.offsetHeight,
-                scrollHeight = ele.scrollHeight;
- 
-            if (scrollTop === 0) {
-                // 如果内容小于容器则同时禁止上下滚动
-                status = offsetHeight >= scrollHeight ? '00' : '01';
-            } else if (scrollTop + offsetHeight >= scrollHeight) {
-                // 已经滚到底部了只能向上滚动
-                status = '10';
-            }
-            if (status != '11') {
-                // 判断当前的滚动方向
-                var direction = currentY - startY > 0 ? '10' : '01';
-                // console.log(direction);
-                // 操作方向和当前允许状态求与运算，运算结果为0，就说明不允许该方向滚动，则禁止默认事件，阻止滚动
-                if (!(parseInt(status, 2) & parseInt(direction, 2))) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return;
-                }
-            }
-        },
-</script>
-
-</body>
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>iOS端禁止列表顶部下拉和底部上拉露出浏览器灰色背景</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	</head>
+	<style type="text/css">
+		html,body{
+			margin: 0;
+			height: 100%;
+			width: 100%;
+			-webkit-overflow-scrolling: touch;
+			-webkit-overflow-scrolling: touch;
+		}
+		#scrollWrap{
+			/*border: 1px #f00 solid;*/
+			height: 100%;
+			overflow: auto;
+		}
+		.wrapper{
+			height: 44px;
+		    line-height: 44px;
+		    font-size: 18px;
+		    font-style: italic;
+		    font-family: cursive;
+		    font-weight: 600;
+		    padding-left: 20px;
+		    background: #CCC;
+		    color: white;
+		    border-bottom: 1px white solid;
+		}
+	</style>
+	<body>
+		<div id="scrollWrap">
+			<div class="wrapper">滚动上拉下拉测试</div>
+			<div class="wrapper">滚动上拉下拉测试</div>
+			<div class="wrapper">滚动上拉下拉测试</div>
+			<div class="wrapper">滚动上拉下拉测试</div>
+			<div class="wrapper">滚动上拉下拉测试</div>
+			
+			<div class="wrapper">滚动上拉下拉测试</div><div class="wrapper">滚动上拉下拉测试</div><div class="wrapper">滚动上拉下拉测试</div><div class="wrapper">滚动上拉下拉测试</div><div class="wrapper">滚动上拉下拉测试</div><div class="wrapper">滚动上拉下拉测试</div><div class="wrapper">滚动上拉下拉测试</div><div class="wrapper">滚动上拉下拉测试</div><div class="wrapper">滚动上拉下拉测试</div><div class="wrapper">滚动上拉下拉测试</div><div class="wrapper">滚动上拉下拉测试</div><div class="wrapper">滚动上拉下拉测试</div><div class="wrapper">滚动上拉下拉测试</div><div class="wrapper">滚动上拉下拉测试</div><div class="wrapper">滚动上拉下拉测试</div><div class="wrapper">滚动上拉下拉测试</div>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+		//滚动条是否在顶部
+		var isScroll_top = true;
+		//滚动条是否在底部
+		var isScrill_bottom = false;
+		function restoreEvent(event) {
+			switch(event.type){
+				case "touchstart" :
+					$startY = event.touches[0].clientY;
+					break;
+				case "touchmove" :
+					$moveY = event.touches[0].clientY;
+					//滑动距离
+					touchesY = $startY - $moveY;
+					//滚动条顶部
+					if(isScroll_top) {
+						if(touchesY < 0) {
+							event.preventDefault();
+						}else{
+							var scrollWrap = document.getElementById("scrollWrap");
+							if(scrollWrap.scrollHeight == scrollWrap.clientHeight) {
+								event.preventDefault();
+							}else {
+								event.stopPropagation();
+							}
+						}
+					//滚动条底部
+					}else if(isScrill_bottom){
+						if(touchesY	> 0) {
+							event.preventDefault();
+						}else{
+							event.stopPropagation();
+						}
+					}
+					break;
+				case "touchend" :
+					break;
+			}
+		}
+	
+		document.getElementById("scrollWrap").addEventListener("touchstart",restoreEvent);
+		document.getElementById("scrollWrap").addEventListener("touchmove",restoreEvent);
+		document.getElementById("scrollWrap").addEventListener("touchend",restoreEvent);
+		
+		document.getElementById("scrollWrap").addEventListener("scroll",function() {
+		    var tabView = document.getElementById("scrollWrap");
+		    var contentHeight = tabView.scrollHeight, //内容高度
+		    scrollTop = tabView.scrollTop; //滚动高度
+		    viewHeight = tabView.clientHeight;
+		
+			if(scrollTop == 0) {
+				isScroll_top = true;
+			}else{
+				isScroll_top = false;
+			}
+		    if ((scrollTop / (contentHeight - viewHeight)) == 1 ) {
+		        isScrill_bottom = true;
+		    }else {
+		    	isScrill_bottom = false;
+		    }
+		});
+	</script>
 </html>
