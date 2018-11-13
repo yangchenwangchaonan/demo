@@ -33,7 +33,7 @@
 	</style>
 	<body>
 		<div id="scrollWrap">
-			<div class="wrapper">滚动上拉下拉测试</div>
+			<div class="wrapper" onclick="a()">滚动上拉下拉测试</div>
 			<div class="wrapper">滚动上拉下拉测试</div>
 			<div class="wrapper">滚动上拉下拉测试</div>
 			<div class="wrapper">滚动上拉下拉测试</div>
@@ -44,6 +44,10 @@
 	</body>
 	
 	<script type="text/javascript">
+		function a(){
+				window.location.replace("a.html")
+			}
+		
 		//滚动条是否在顶部
 		var isScroll_top = true;
 		//滚动条是否在底部
